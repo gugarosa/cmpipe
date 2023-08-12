@@ -1,4 +1,4 @@
-from mpipe import (OrderedStage, Pipeline)
+from cmpipe import (OrderedStage, Pipeline)
 
 
 def yes(value):

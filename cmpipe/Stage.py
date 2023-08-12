@@ -90,7 +90,7 @@ class Stage(object):
         if not self._output_tubes:
             self._output_tubes.append(self._worker_class.getTubeClass()())
 
-        self._worker_class.assemble(
+        self.workers = self._worker_class.assemble(
             self._worker_args,
             self._input_tube,
             self._output_tubes,
@@ -102,3 +102,12 @@ class Stage(object):
         # Build all downstream stages.
         for stage in self._next_stages:
             stage.build()
+    
+    def join(self):
+        for worker in self.workers:
+            worker.join()
+            worker.terminate()
+
+        for stage in self._next_stages:
+            stage.join()
+

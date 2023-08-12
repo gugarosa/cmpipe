@@ -74,9 +74,9 @@ Without a third stage doing the printing, the caller of the pipeline must print 
 
   [`source <pipeout.py>`_]
 
-Note that, before fetching results, we need to put the "stop" task on the pipeline. That's because :meth:`~mpipe.Pipeline.results()` returns a generator function that continues to fetch results so long as the pipeline remains alive. Without previously signaling "stop", the fetch loop would hang on the fifth iteration.
+Note that, before fetching results, we need to put the "stop" task on the pipeline. That's because :meth:`~cmpipe.Pipeline.results()` returns a generator function that continues to fetch results so long as the pipeline remains alive. Without previously signaling "stop", the fetch loop would hang on the fifth iteration.
 
-Another way to fetch results is to call :meth:`~mpipe.Pipeline.get()` exactly four times. Using this method it doesn't matter whether you signal "stop" before or after the fetch loop:
+Another way to fetch results is to call :meth:`~cmpipe.Pipeline.get()` exactly four times. Using this method it doesn't matter whether you signal "stop" before or after the fetch loop:
 ::
 
   for foobar in range(10):
@@ -107,6 +107,6 @@ We can fork into more than two paths, but let's keep it simple for now.
 
   [`source <fork.py>`_]
 
-This time instead of using standalone functions to implement the work, we used classes. It's really the same thing, but with classes you have greater potential for encapsulation and code organization when implementing complex stages. Note that this requires a slightly different way of creating stage objects, now using the :mod:`~mpipe.Stage` class.
+This time instead of using standalone functions to implement the work, we used classes. It's really the same thing, but with classes you have greater potential for encapsulation and code organization when implementing complex stages. Note that this requires a slightly different way of creating stage objects, now using the :mod:`~cmpipe.Stage` class.
 
 .. the end

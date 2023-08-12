@@ -1,4 +1,4 @@
-from mpipe import (UnorderedWorker, Stage, Pipeline)
+from cmpipe import (UnorderedWorker, Stage, Pipeline)
 
 
 class Yes(UnorderedWorker):

@@ -41,7 +41,7 @@ Running such a filter in our scenario, we lose the 6th and 10th task:
 .. image:: filter.png
    :align: center
 
-Implementing the solution is easy. Simply wrap the original stage into a :mod:`~mpipe.FilterStage`:
+Implementing the solution is easy. Simply wrap the original stage into a :mod:`~cmpipe.FilterStage`:
 
 .. container:: source-click-above
 

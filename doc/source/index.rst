@@ -18,7 +18,7 @@
    :align: center
 
 It's a two-stage pipeline that increments and doubles numbers, each stage concurrently running three workers.
-Here's how you'd code it up using the :mod:`mpipe` module:
+Here's how you'd code it up using the :mod:`cmpipe` module:
 
 .. literalinclude:: tiny.py
 
@@ -30,7 +30,7 @@ Installation
 Get |NAME| now! Easiest way is using *pip*:
 ::
 
-  pip install mpipe
+  pip install cmpipe
 
 Check out :doc:`download` for other ways of getting |NAME| up and running on your system. 
 

@@ -9,7 +9,7 @@ class FilterWorker(OrderedWorker):
 
     def __init__(self, stages, max_tasks=1, drop_results=False, cache_results=False):
         """Constructor takes an iterable of
-        :class:`~mpipe.Stage` 
+        :class:`~cmpipe.Stage` 
         objects and creates one pipeline for each stage.
         The filter then propagates its input task as input into each pipeline,
         filtered by limiting the number of tasks allowed in the stream of a pipeline,

@@ -1,6 +1,6 @@
 # import sys
 from builtins import range
-from mpipe import (UnorderedStage, Pipeline)
+from cmpipe import (UnorderedStage, Pipeline)
 
 
 def increment(value):

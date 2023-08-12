@@ -132,6 +132,6 @@ Even if your worker implementation produces a result, you may choose to disable 
 
 This pipeline does not produce output -- the final for-loop is useless.
 
-Results of a pipeline use system resources for storage until they're eventually retrieved using :meth:`~mpipe.Pipeline.get` or :meth:`~mpipe.Pipeline.results`. But sometimes you may not want this effect, especially if the workflow produces a lot of output, none of which you care about. By disabling results, you're able to reuse an existing worker/stage implementation, while forcing all output to be thrown away.
+Results of a pipeline use system resources for storage until they're eventually retrieved using :meth:`~cmpipe.Pipeline.get` or :meth:`~cmpipe.Pipeline.results`. But sometimes you may not want this effect, especially if the workflow produces a lot of output, none of which you care about. By disabling results, you're able to reuse an existing worker/stage implementation, while forcing all output to be thrown away.
 
 .. End of file.

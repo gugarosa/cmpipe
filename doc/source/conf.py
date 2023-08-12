@@ -48,7 +48,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'MPipe'
+project = u'cmpipe'
 copyright = u'2014, Velimir Mlaker'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -101,7 +101,7 @@ autoclass_content = 'both'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'mpipe'
+html_theme = 'cmpipe'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -180,7 +180,7 @@ html_show_copyright = True
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'MPipedoc'
+htmlhelp_basename = 'cmpipedoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -194,7 +194,7 @@ htmlhelp_basename = 'MPipedoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'MPipe.tex', u'MPipe Documentation',
+  ('index', 'cmpipe.tex', u'cmpipe Documentation',
    u'Velimir Mlaker', 'manual'),
 ]
 
@@ -227,12 +227,12 @@ latex_domain_indices = False
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'mpipe', u'MPipe Documentation',
+    ('index', 'cmpipe', u'cmpipe Documentation',
      [u'Velimir Mlaker'], 1)
 ]
 
 rst_prolog = '''
-.. |NAME| replace:: MPipe
+.. |NAME| replace:: cmpipe
 '''
 
 # End of file.

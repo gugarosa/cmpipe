@@ -1,5 +1,5 @@
 import time
-from mpipe import (OrderedStage, Pipeline)
+from cmpipe import (OrderedStage, Pipeline)
 
 
 def echo(value):

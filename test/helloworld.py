@@ -1,4 +1,4 @@
-import mpipe
+import cmpipe
 
 
 def echo(value):
@@ -6,8 +6,8 @@ def echo(value):
 
 
 def main():
-    stage = mpipe.OrderedStage(echo)
-    pipe = mpipe.Pipeline(stage)
+    stage = cmpipe.OrderedStage(echo)
+    pipe = cmpipe.Pipeline(stage)
 
     for val in (0, 1, 2, 3):
         pipe.put(val)

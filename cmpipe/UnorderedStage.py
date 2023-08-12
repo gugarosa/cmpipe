@@ -17,8 +17,8 @@ class _Worker(UnorderedWorker):
 
 
 class UnorderedStage(Stage):
-    """A specialized :class:`~mpipe.Stage`, 
-    internally creating :class:`~mpipe.UnorderedWorker` objects."""
+    """A specialized :class:`~cmpipe.Stage`, 
+    internally creating :class:`~cmpipe.UnorderedWorker` objects."""
     def __init__(self, target, size=1, disable_result=False, max_backlog=None):
         """Constructor takes a function implementing
         :meth:`UnorderedWorker.doTask`."""

@@ -1,6 +1,6 @@
 from collections import deque
 import numpy as np
-from mpipe import (OrderedWorker, Stage, OrderedStage, Pipeline)
+from cmpipe import (OrderedWorker, Stage, OrderedStage, Pipeline)
 
 last10 = deque()
 junk = 'http://ws.cdyne.com/delayedstockquote/delayedstockquote.asmx/GetQuote?StockSymbol=fac&LicenseKey=0'

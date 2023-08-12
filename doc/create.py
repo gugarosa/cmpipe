@@ -5,7 +5,7 @@ Run from the current directory, e.g.:
 """
 
 import subprocess
-import mpipe
+import cmpipe
 import sys
 import os
 
@@ -42,7 +42,7 @@ def runDia(diagram):
     print('  {}'.format(cmd))
     subprocess.call(cmd, shell=True)
     return True
-pipe = mpipe.Pipeline(mpipe.UnorderedStage(runDia, len(diagrams)))
+pipe = cmpipe.Pipeline(cmpipe.UnorderedStage(runDia, len(diagrams)))
 for diagram in diagrams: 
     pipe.put(diagram)
 pipe.put(None)
@@ -73,7 +73,7 @@ def runCopy(fname):
     print('  {}'.format(cmd))
     subprocess.call(cmd, shell=True)
     return True
-pipe = mpipe.Pipeline(mpipe.UnorderedStage(runCopy, len(codes)))
+pipe = cmpipe.Pipeline(cmpipe.UnorderedStage(runCopy, len(codes)))
 for fname in codes: 
     pipe.put(fname)
 pipe.put(None)
@@ -92,7 +92,7 @@ def runMove(fname):
     print('  {}'.format(cmd))
     subprocess.call(cmd, shell=True)
     return True
-pipe = mpipe.Pipeline(mpipe.UnorderedStage(runMove, len(codes)))
+pipe = cmpipe.Pipeline(cmpipe.UnorderedStage(runMove, len(codes)))
 for fname in codes: 
     pipe.put(fname)
 pipe.put(None)
@@ -107,7 +107,7 @@ def runDia(diagram):
     print('  {}'.format(cmd))
     subprocess.call(cmd, shell=True)
     return True
-pipe = mpipe.Pipeline(mpipe.UnorderedStage(runDia, len(diagrams)))
+pipe = cmpipe.Pipeline(cmpipe.UnorderedStage(runDia, len(diagrams)))
 for diagram in diagrams: 
     pipe.put(diagram)
 pipe.put(None)

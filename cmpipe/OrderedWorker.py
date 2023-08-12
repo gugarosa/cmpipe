@@ -1,15 +1,17 @@
-"""Implements UnorderedWorker class."""
+"""Implements OrderedWorker class."""
 
 import multiprocessing
-from .TubeQ import TubeQ
+from .TubeP import TubeP
 
-class UnorderedWorker(multiprocessing.Process):
-    """An UnorderedWorker object operates independently of other
-    workers in the stage, fetching the first available task, and
-    publishing its result whenever it is done
-    (without coordinating with neighboring workers).
-    Consequently, the order of output results may not match 
-    that of corresponding input tasks."""
+class OrderedWorker(multiprocessing.Process):
+    """An OrderedWorker object operates in a stage where the order 
+    of output results always matches that of corresponding input tasks.
+
+    A worker is linked to its two nearest neighbors -- the previous 
+    worker and the next -- all workers in the stage thusly connected
+    in circular fashion. 
+    Input tasks are fetched in this order. Before publishing its result, 
+    a worker first waits for its previous neighbor to do the same."""
 
     def __init__(self):
         pass
@@ -21,23 +23,34 @@ class UnorderedWorker(multiprocessing.Process):
         num_workers,     # Total number of workers in the stage.
         disable_result,  # Whether to override any result with None.
         do_stop_task,    # Whether to call doTask() on "stop" request.
+        worker_id,       # Worker ID
         ):
         """Create *num_workers* worker objects with *input_tube* and 
         an iterable of *output_tubes*. The worker reads a task from *input_tube* 
         and writes the result to *output_tubes*."""
 
-        super(UnorderedWorker, self).__init__()
+        super(OrderedWorker, self).__init__()
         self._tube_task_input = input_tube
         self._tubes_result_output = output_tubes
         self._num_workers = num_workers
+
+        # Serializes reading from input tube.
+        self._lock_prev_input = None
+        self._lock_next_input = None
+
+        # Serializes writing to output tube.
+        self._lock_prev_output = None
+        self._lock_next_output = None
+
         self._disable_result = disable_result
         self._do_stop_task = do_stop_task
+        self.worker_id = worker_id
 
     @staticmethod
     def getTubeClass():
         """Return the tube class implementation."""
-        return TubeQ
-    
+        return TubeP
+
     @classmethod
     def assemble(
         cls, 
@@ -45,8 +58,8 @@ class UnorderedWorker(multiprocessing.Process):
         input_tube, 
         output_tubes, 
         size, 
-        disable_result,
-        do_stop_task,
+        disable_result=False,
+        do_stop_task=False,
         ):
         """Create, assemble and start workers.
         Workers are created of class *cls*, initialized with *args*, and given
@@ -65,18 +78,51 @@ class UnorderedWorker(multiprocessing.Process):
                 size,
                 disable_result,
                 do_stop_task,
+                ii,
                 )
             workers.append(worker)
+
+        # Connect the workers.
+        for ii in range(size):
+            worker_this = workers[ii]
+            worker_prev = workers[ii-1]
+            worker_prev._link(
+                worker_this, 
+                next_is_first=(ii==0),  # Designate 0th worker as the first.
+                )
 
         # Start the workers.
         for worker in workers:
             worker.start()
 
+        return workers
+
+    def _link(self, next_worker, next_is_first=False):
+        """Link the worker to the given next worker object, 
+        connecting the two workers with communication tubes."""
+
+        lock = multiprocessing.Lock()
+        next_worker._lock_prev_input = lock
+        self._lock_next_input = lock
+        lock.acquire()
+
+        lock = multiprocessing.Lock()
+        next_worker._lock_prev_output = lock
+        self._lock_next_output = lock
+        lock.acquire()
+
+        # If the next worker is the first one, trigger it now.
+        if next_is_first:
+            self._lock_next_input.release()
+            self._lock_next_output.release()
+
     def putResult(self, result):
         """Register the *result* by putting it on all the output tubes."""
+        self._lock_prev_output.acquire()
         for tube in self._tubes_result_output:
             tube.put((result, 0))
-
+        self._lock_next_output.release()
+        
     def run(self):
 
         # Run implementation's initialization.
@@ -84,7 +130,16 @@ class UnorderedWorker(multiprocessing.Process):
 
         while True:
             try:
+                # Wait on permission from the previous worker that
+                # it is okay to retrieve the input task.
+                self._lock_prev_input.acquire()
+
+                # Retrieve the input task.
                 (task, count) = self._tube_task_input.get()
+
+                # Permit the next worker to retrieve the input task.
+                self._lock_next_input.release()
+
             except:
                 (task, count) = (None, 0)
 
@@ -99,7 +154,14 @@ class UnorderedWorker(multiprocessing.Process):
                 # will pick it up. 
                 count += 1
                 if count == self._num_workers:
-                    self.putResult(None)
+                    
+                    # Propagating the "stop" to the next stage does not require
+                    # synchronization with previous and next worker because we're
+                    # guaranteed (from the count value) that this is the last worker alive. 
+                    # Therefore, just put the "stop" signal on the result tube.
+                    for tube in self._tubes_result_output:
+                        tube.put((None, 0))
+
                 else:
                     self._tube_task_input.put((None, count))
 
@@ -122,7 +184,7 @@ class UnorderedWorker(multiprocessing.Process):
                 self.putResult(result)
 
     def doTask(self, task):
-        """Implement this method in the subclass with work
+        """Implement this method in the subclass with work functionality
         to be executed on each *task* object.
         The implementation can publish the output result in one of two ways,
         either by 1) calling :meth:`putResult` and returning ``None``, or

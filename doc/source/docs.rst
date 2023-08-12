@@ -25,7 +25,7 @@ Documentation contents
 .. toctree::
    examples
 
-.. For developers of MPipe:
+.. For developers of cmpipe:
 
 .. toctree::
    fordevelopers

@@ -1,4 +1,4 @@
-"""Distutils file for MPipe."""
+"""Distutils file for cmpipe."""
 
 from distutils.core import setup, Command
 import subprocess
@@ -41,19 +41,19 @@ class Test(Command):
         print(command)
         subprocess.call(command, shell=True)
 
-from src import __version__
+from cmpipe import __version__
 
 setup(
-    name         = 'mpipe',
+    name         = 'cmpipe',
     version      = __version__,
     description  = 'Multiprocess pipeline toolkit',
-    url          = 'http://vmlaker.github.io/mpipe',
+    url          = 'http://vmlaker.github.io/cmpipe',
     author       = 'Velimir Mlaker',
     author_email = 'velimir.mlaker@gmail.com',
     license      = 'MIT',
     long_description = open('README.rst').read(),
-    package_dir  = {'mpipe' : 'src'},
-    packages     = ['mpipe'],
+    package_dir  = {'cmpipe' : 'cmpipe'},
+    packages     = ['cmpipe'],
     cmdclass     = { 'clean2' : Clean2, 'test' : Test, },
     classifiers  = [
         'Development Status :: 5 - Production/Stable',

@@ -1,6 +1,6 @@
 """Solution for http://stackoverflow.com/questions/8277715"""
 
-from mpipe import (OrderedStage, Pipeline)
+from cmpipe import (OrderedStage, Pipeline)
 
 
 def f2(value):

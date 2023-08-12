@@ -4,34 +4,34 @@
 |NAME| API
 **********
 
-.. module:: mpipe
+.. module:: cmpipe
 
-.. autoclass:: mpipe.OrderedWorker
+.. autoclass:: cmpipe.OrderedWorker
    :members: doTask, doInit, putResult
 
-.. autoclass:: mpipe.UnorderedWorker
+.. autoclass:: cmpipe.UnorderedWorker
    :members: doTask, doInit, putResult
 
 ----
 
-.. autoclass:: mpipe.Stage
+.. autoclass:: cmpipe.Stage
    :members: link, put, get
 
-.. autoclass:: mpipe.OrderedStage
+.. autoclass:: cmpipe.OrderedStage
    :members:
 
-.. autoclass:: mpipe.UnorderedStage
+.. autoclass:: cmpipe.UnorderedStage
    :members:
 
 ----
 
-.. autoclass:: mpipe.Pipeline
+.. autoclass:: cmpipe.Pipeline
    :members: put, get, results
 
 ----
 
-.. autoclass:: mpipe.FilterWorker
+.. autoclass:: cmpipe.FilterWorker
 
-.. autoclass:: mpipe.FilterStage
+.. autoclass:: cmpipe.FilterStage
 
 .. End of file.

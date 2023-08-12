@@ -4,7 +4,7 @@ For developers
 ==============
 
 If you want to contribute to |NAME| development,
-start by forking the `repo <https://github.com/vmlaker/mpipe>`_.
+start by forking the `repo <https://github.com/vmlaker/cmpipe>`_.
 After making changes to the code, run the build/test cycle
 as shown in the developer guide below.
 

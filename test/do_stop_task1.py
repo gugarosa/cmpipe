@@ -1,4 +1,4 @@
-from mpipe import (Stage, OrderedWorker, Pipeline)
+from cmpipe import (Stage, OrderedWorker, Pipeline)
 
 
 class Echo(OrderedWorker):

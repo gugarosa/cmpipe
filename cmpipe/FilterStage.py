@@ -5,7 +5,7 @@ from .FilterWorker import FilterWorker
 
 class FilterStage(Stage):
     """Single worker stage running 
-    :class:`~mpipe.FilterWorker`."""
+    :class:`~cmpipe.FilterWorker`."""
     def __init__(
         self, 
         stages, 

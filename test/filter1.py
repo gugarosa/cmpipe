@@ -1,5 +1,5 @@
 import time
-from mpipe import (OrderedStage, FilterStage, Pipeline, OrderedWorker, Stage)
+from cmpipe import (OrderedStage, FilterStage, Pipeline, OrderedWorker, Stage)
 
 
 def pass_thru(value):

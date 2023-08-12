@@ -6,8 +6,11 @@ class TubeQ:
     """A unidirectional communication channel 
     using :class:`multiprocessing.Queue` for underlying implementation."""
 
-    def __init__(self, maxsize=0):
+    def __init__(self, maxsize=0, process_start_method='spawn'):
+        self._default_start_method = multiprocessing.get_start_method()
+        multiprocessing.set_start_method(process_start_method, True)
         self._queue = multiprocessing.Queue(maxsize)
+        multiprocessing.set_start_method(self._default_start_method, True)
 
     def put(self, data):
         """Put an item on the tube."""

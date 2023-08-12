@@ -1,4 +1,4 @@
-from mpipe import (OrderedStage as OStage, Pipeline)
+from cmpipe import (OrderedStage as OStage, Pipeline)
 
 
 def magnify(value):

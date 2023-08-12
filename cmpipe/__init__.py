@@ -1,4 +1,4 @@
-"""MPipe is a multiprocessing pipeline toolkit for Python."""
+"""cmpipe is a multiprocessing pipeline toolkit for Python."""
 
 __version__ = '1.0.8'
 

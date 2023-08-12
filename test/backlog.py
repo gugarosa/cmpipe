@@ -1,8 +1,8 @@
 from sys import stdout
 from threading import Thread
 from time import sleep
-from mpipe.Pipeline import Pipeline
-from mpipe.UnorderedStage import UnorderedStage
+from cmpipe.Pipeline import Pipeline
+from cmpipe.UnorderedStage import UnorderedStage
 
 
 def write(value):

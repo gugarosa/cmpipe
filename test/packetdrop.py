@@ -1,4 +1,4 @@
-from mpipe import OrderedStage, FilterStage, Pipeline
+from cmpipe import OrderedStage, FilterStage, Pipeline
 import time
 
 def echo(value):

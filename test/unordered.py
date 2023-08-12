@@ -1,4 +1,4 @@
-from mpipe import (UnorderedStage, Pipeline)
+from cmpipe import (UnorderedStage, Pipeline)
 
 
 def increment(value):

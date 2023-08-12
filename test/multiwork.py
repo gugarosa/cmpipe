@@ -1,5 +1,5 @@
 import sys
-import mpipe
+import cmpipe
 from builtins import range
 
 
@@ -9,8 +9,8 @@ def for_loop(amount):
 
 
 def main():
-    stage = mpipe.UnorderedStage(for_loop, 2)
-    pipe = mpipe.Pipeline(stage)
+    stage = cmpipe.UnorderedStage(for_loop, 2)
+    pipe = cmpipe.Pipeline(stage)
 
     for foobar in range(5):
         pipe.put(int(sys.argv[1]) if len(sys.argv) >= 2 else 10)
